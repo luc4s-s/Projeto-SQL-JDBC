@@ -1,0 +1,5 @@
+
+
+	JDBC é um conjunto de class e interfaces escrita em java para fazer envio de instrucoes SQL para qualquer banco de dados relacional.
+	
+ Projeto java com JDBC, Inserindo, Atualizando, Consultando e Deletando registro do banco.
