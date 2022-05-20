@@ -22,13 +22,12 @@ public class UserposDAO {
 	public void Salvar(Userposjava userposjava) {
 		try {
 			// sql para inser no banco
-			String sql = "insert into userposjava (id, nome, email) values (?, ?, ?)";
+			String sql = "insert into userposjava (nome, email) values (?, ?)";
 			PreparedStatement insert = connection.prepareStatement(sql);// preparando o sql
 
 			// passando os paramentros segindo as ordem
-			insert.setLong(1, userposjava.getId());
-			insert.setString(2, userposjava.getNome());
-			insert.setString(3, userposjava.getEmail());
+			insert.setString(1, userposjava.getNome());
+			insert.setString(2, userposjava.getEmail());
 
 			insert.execute();// executando
 			connection.commit();// salvando no banco

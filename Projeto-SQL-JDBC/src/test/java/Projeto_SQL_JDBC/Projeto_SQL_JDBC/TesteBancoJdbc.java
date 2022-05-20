@@ -18,7 +18,6 @@ public class TesteBancoJdbc{
 		UserposDAO userposDAO = new UserposDAO();
 		Userposjava userposjava = new Userposjava();
 		
-		userposjava.setId(6L);
 		userposjava.setNome("junior");
 		userposjava.setEmail("junior@gmail.com");
 		
@@ -63,6 +62,7 @@ public class TesteBancoJdbc{
 			UserposDAO dao = new UserposDAO();
 			
 			Userposjava objetoBanco = dao.buscar(5L);
+									//aqui fica oque vai atualizar no nome do banco
 			objetoBanco.setNome("nome atualizado com metodo atualizar");//nome sendo mudado no banco
 			
 			dao.atualizar(objetoBanco);
