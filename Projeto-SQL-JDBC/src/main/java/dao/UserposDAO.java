@@ -25,7 +25,7 @@ public class UserposDAO {
 			String sql = "insert into userposjava (id, nome, email) values (?, ?, ?)";
 			PreparedStatement insert = connection.prepareStatement(sql);//preparando o sql
 			
-			//passano os paramentros segindo as ordem
+			//passando os paramentros segindo as ordem
 			insert.setLong(1, userposjava.getId());
 			insert.setString(2, userposjava.getNome());
 			insert.setString(3, userposjava.getEmail());
