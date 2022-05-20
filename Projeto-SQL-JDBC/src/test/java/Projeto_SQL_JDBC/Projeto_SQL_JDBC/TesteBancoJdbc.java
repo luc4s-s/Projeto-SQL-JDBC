@@ -54,5 +54,25 @@ public class TesteBancoJdbc{
 			e.printStackTrace();
 		}
 	}
+	
+	@Test
+	public void initAtualizar() {
+		
+		try {
+			
+			UserposDAO dao = new UserposDAO();
+			
+			Userposjava objetoBanco = dao.buscar(5L);
+			objetoBanco.setNome("nome atualizado com metodo atualizar");//nome sendo mudado no banco
+			
+			dao.atualizar(objetoBanco);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
  
 }

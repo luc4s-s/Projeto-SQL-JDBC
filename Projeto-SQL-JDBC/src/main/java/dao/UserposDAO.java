@@ -18,20 +18,20 @@ public class UserposDAO {
 		connection = SingleConnection.getConnection();
 	}
 
-	//metodo para salvar no banco 
+	// metodo para salvar no banco
 	public void Salvar(Userposjava userposjava) {
 		try {
-			//sql para inser no banco
+			// sql para inser no banco
 			String sql = "insert into userposjava (id, nome, email) values (?, ?, ?)";
-			PreparedStatement insert = connection.prepareStatement(sql);//preparando o sql
-			
-			//passando os paramentros segindo as ordem
+			PreparedStatement insert = connection.prepareStatement(sql);// preparando o sql
+
+			// passando os paramentros segindo as ordem
 			insert.setLong(1, userposjava.getId());
 			insert.setString(2, userposjava.getNome());
 			insert.setString(3, userposjava.getEmail());
-			
-			insert.execute();//executando 
-			connection.commit();//salvando no banco
+
+			insert.execute();// executando
+			connection.commit();// salvando no banco
 
 		} catch (Exception e) {
 			try {
@@ -43,60 +43,69 @@ public class UserposDAO {
 		}
 	}
 
-	
-	//metodo para retorna uma Lista 
+	// metodo para retorna uma Lista
 	public List<Userposjava> listar() throws Exception {
-		List<Userposjava> list = new ArrayList<Userposjava>();//instanciando a lista
-		
-		String sql = "select * from userposjava";//montando o sql
-		
-		PreparedStatement statement = connection.prepareStatement(sql);//preparando o sql
-		ResultSet resultado = statement.executeQuery();//executando no banco
-		
-		while (resultado.next()) {//enquanto for true ele vai percorrer a lista 
-			Userposjava userposjava = new Userposjava();//criando novos objetos
-			
-			//setando objetos
+		List<Userposjava> list = new ArrayList<Userposjava>();// instanciando a lista
+
+		String sql = "select * from userposjava";// montando o sql
+
+		PreparedStatement statement = connection.prepareStatement(sql);// preparando o sql
+		ResultSet resultado = statement.executeQuery();// executando no banco
+
+		while (resultado.next()) {// enquanto for true ele vai percorrer a lista
+			Userposjava userposjava = new Userposjava();// criando novos objetos
+
+			// setando objetos
 			userposjava.setId(resultado.getLong("id"));
 			userposjava.setNome(resultado.getString("nome"));
 			userposjava.setEmail(resultado.getString("email"));
-			
-			//adicionadno na lista
+
+			// adicionadno na lista
 			list.add(userposjava);
 		}
-		
+
 		return list;
 	}
-	
-	//metodo para consultar so um atributo
+
+	// metodo para consultar so um atributo
 	public Userposjava buscar(Long id) throws Exception {
-		Userposjava  retorno = new Userposjava();
-		
-		String sql = "select * from userposjava where id = " + id;//montando o sql
-		
-		PreparedStatement statement = connection.prepareStatement(sql);//preparando o sql
-		ResultSet resultado = statement.executeQuery();//executando no banco
-		
-		while (resultado.next()) {//retorna apenas um objeto ou nenhum
-			
-			//setando os objetos
+		Userposjava retorno = new Userposjava();
+
+		String sql = "select * from userposjava where id = " + id;// montando o sql
+
+		PreparedStatement statement = connection.prepareStatement(sql);// preparando o sql
+		ResultSet resultado = statement.executeQuery();// executando no banco
+
+		while (resultado.next()) {// retorna apenas um objeto ou nenhum
+
+			// setando os objetos
 			retorno.setId(resultado.getLong("id"));
 			retorno.setNome(resultado.getString("nome"));
 			retorno.setEmail(resultado.getString("email"));
-			
+
 		}
-		
+
 		return retorno;
 	}
+
+	public void atualizar(Userposjava useposjava) {
+		try {
+							// montando o sql
+			String sql = "update userposjava set nome = ? where id = " + useposjava.getId();
+
+			PreparedStatement statement = connection.prepareStatement(sql);// preparando o sql
+			statement.setString(1, useposjava.getNome());
+
+			statement.execute();// executando sql
+			connection.commit();//fazendo o commit da atualizaçao
+
+		} catch (Exception e) {
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
