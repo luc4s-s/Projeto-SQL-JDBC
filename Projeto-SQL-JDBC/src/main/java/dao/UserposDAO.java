@@ -100,8 +100,28 @@ public class UserposDAO {
 
 		} catch (Exception e) {
 			try {
-				connection.rollback();
+				connection.rollback();// reverte operaçao se tiver erro
 			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void deletar(Long id) {
+		
+		try {
+			String sql = "delete from userposjava where id = " + id;//montando o sql para deletar
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);//preparando o sql 
+			preparedStatement.execute(); // executando sql
+			connection.commit();//fazendo o commit de delete
+			
+		} catch (Exception e) {
+			try {
+				connection.rollback();// reverte operaçao se tiver erro
+			} catch (SQLException e1) {
+				
 				e1.printStackTrace();
 			}
 			e.printStackTrace();
