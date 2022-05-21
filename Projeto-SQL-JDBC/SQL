@@ -16,3 +16,14 @@ constraint user_pk primary key(id)
     
     --COLOCANDO ID COMO UNICO
     alter table userposjava add unique (id);
+    
+    
+    --TABELA TELEFONE
+    CREATE TABLE telefoneuser
+	(
+  	id bigint NOT NULL,
+  	numero character varying(255)NOT NULL,
+ 	tipo character varying(255)NOT NULL,
+ 	usuariopessoa bigint NOT NULL,
+  	CONSTRAINT telefone_id PRIMARY KEY(id)
+	)
