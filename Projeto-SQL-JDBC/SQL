@@ -1,15 +1,18 @@
 
 
 
-	CRIANDO A TABELA E AS COLUMAS BANCO POSTGRES
+	--CRIANDO A TABELA E AS COLUMAS BANCO POSTGRES
 create table userposjava
 id bigint not null,
 nome character varying(255),
 email character varying(255),
 constraint user_pk primary key(id)
 
- 	INSERT
- 
+ 	--INSERT
  	INSERT INTO public.userposjava(
             id, nome, email)
     VALUES (?, ?, ?);
+    
+    
+    --COLOCANDO ID COMO UNICO
+    alter table userposjava add unique (id);
