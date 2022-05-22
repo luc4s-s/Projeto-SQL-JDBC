@@ -1,29 +1,35 @@
 
 
 
-	--CRIANDO A TABELA E AS COLUMAS BANCO POSTGRES
-create table userposjava
-id bigint not null,
-nome character varying(255),
-email character varying(255),
-constraint user_pk primary key(id)
+	--CRIANDO A TABELA E AS COLUMAS BANCO POSTGRES--
+		create table userposjava
+		id bigint not null,
+		nome character varying(255),
+		email character varying(255),
+		constraint user_pk primary key(id)
 
- 	--INSERT
- 	INSERT INTO public.userposjava(
-            id, nome, email)
-    VALUES (?, ?, ?);
+ 	--INSERT--
+ 		INSERT INTO public.userposjava(
+            	id, nome, email)
+    	VALUES (?, ?, ?);
     
     
-    --COLOCANDO ID COMO UNICO
-    alter table userposjava add unique (id);
+    --COLOCANDO ID COMO UNICO--
+    	alter table userposjava add unique (id);
     
     
-    --TABELA TELEFONE
-    CREATE TABLE telefoneuser
-	(
-  	id bigint NOT NULL,
-  	numero character varying(255)NOT NULL,
- 	tipo character varying(255)NOT NULL,
- 	usuariopessoa bigint NOT NULL,
-  	CONSTRAINT telefone_id PRIMARY KEY(id)
-	)
+    --TABELA TELEFONE--
+    	CREATE TABLE telefoneuser
+		(
+  		id bigint NOT NULL,
+  		numero character varying(255)NOT NULL,
+ 		tipo character varying(255)NOT NULL,
+ 		usuariopessoa bigint NOT NULL,
+  		CONSTRAINT telefone_id PRIMARY KEY(id)
+		)
+	
+	--INNER JOIN--
+		select * from telefoneuser as fone
+		inner join userposjava as userp
+		on fone.usuariopessoa = userp.id
+		where userp.id = ****
