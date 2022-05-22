@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import conexaojdbc.SingleConnection;
+import model.Telefone;
 import model.Userposjava;
 
 public class UserposDAO {
@@ -18,7 +19,7 @@ public class UserposDAO {
 		connection = SingleConnection.getConnection();
 	}
 
-	// metodo para salvar no banco
+	// metodo para Salvar no banco
 	public void Salvar(Userposjava userposjava) {
 		try {
 			// sql para inser no banco
@@ -41,6 +42,32 @@ public class UserposDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	// metodo para salvarTelefone no banco
+	public void salvarTelefone(Telefone telefone ) {
+		
+		try {
+			
+			String sql = "INSERT INTO public.telefoneuser(numero, tipo, usuariopessoa) VALUES (?, ?, ?);"; //montando o sql
+			PreparedStatement statement = connection.prepareStatement(sql);//preparando sql
+			//setando os Atributos
+			statement.setString(1, telefone.getNumero());
+			statement.setString(2, telefone.getTipo());
+			statement.setLong(3, telefone.getUsuario());
+			statement.execute();//executando 
+			
+			connection.commit();//fazendo o commit no banco 
+			
+		} catch (Exception e) {
+			try {
+				connection.rollback();// reverte operaçao se tiver erro
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		
+	}
+	
 
 	// metodo para retorna uma Lista
 	public List<Userposjava> listar() throws Exception {
@@ -87,6 +114,7 @@ public class UserposDAO {
 		return retorno;
 	}
 
+	// metodo para Atualizar no banco
 	public void atualizar(Userposjava useposjava) {
 		try {
 							// montando o sql
@@ -108,7 +136,7 @@ public class UserposDAO {
 		}
 	}
 	
-	
+	// metodo para Deletar no banco
 	public void deletar(Long id) {
 		
 		try {

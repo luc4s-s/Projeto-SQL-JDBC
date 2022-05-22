@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import conexaojdbc.SingleConnection;
 import dao.UserposDAO;
+import model.Telefone;
 import model.Userposjava;
 
 public class TesteBancoJdbc{
@@ -41,7 +42,7 @@ public class TesteBancoJdbc{
 	}
 	
 	@Test
-	public void initbuscar() {//metodo para vazer uma consulta
+	public void initbuscar() {//metodo para fazer uma consulta
 		UserposDAO dao = new UserposDAO();
 		
 		try {
@@ -55,7 +56,7 @@ public class TesteBancoJdbc{
 	}
 	
 	@Test
-	public void initAtualizar() {
+	public void initAtualizar() {//metodo para Atualizar
 		
 		try {
 			
@@ -74,7 +75,7 @@ public class TesteBancoJdbc{
 	}
 	
 	@Test
-	public void initDeletar() {
+	public void initDeletar() {//metodo para Deletar
 		
 		try {
 			
@@ -83,6 +84,18 @@ public class TesteBancoJdbc{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Test
+	public void testeInsertTelefone() {//metodo para salvarTelefone
+		Telefone telefone = new Telefone();
+		telefone.setNumero("(81) 9 55555555");// atributo que vai ser salvo la no banco
+		telefone.setTipo("Casa");// atributo que vai ser salvo la no banco
+		telefone.setUsuario(3L);// Id/codigo para qual o telefone vai ser salvo 
+		
+		UserposDAO dao = new UserposDAO();
+		dao.salvarTelefone(telefone);//chamando o metodo salvarTelefone
+		
 	}
  
 }
