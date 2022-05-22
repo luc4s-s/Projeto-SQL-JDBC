@@ -188,4 +188,31 @@ public class UserposDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	//metodo para deletar em cascata filhos e pais  
+	public void deleteFonesPorUser(Long idUser) {
+		
+		try {
+		String sqlFone = "delete from telefoneuser where usuariopessoa = " + idUser;
+		String sqlUser = "delete from userposjava where id = " + idUser;
+		
+		// deletando primeiro o filho 
+		PreparedStatement preparedStatement = connection.prepareStatement(sqlFone);
+		preparedStatement.executeUpdate();
+		connection.commit();
+		
+		//depois deleta o pai 
+		preparedStatement = connection.prepareStatement(sqlUser);
+		preparedStatement.executeUpdate();
+		connection.commit();
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
 }

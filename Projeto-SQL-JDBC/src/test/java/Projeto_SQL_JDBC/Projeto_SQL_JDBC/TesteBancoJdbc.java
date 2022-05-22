@@ -112,5 +112,12 @@ public class TesteBancoJdbc{
 		}
 		
 	}
+	
+	@Test
+	public void testeDeleteUserFones() {//metodo para deletar em cascata filhos e pais 
+		UserposDAO dao = new UserposDAO();
+		dao.deleteFonesPorUser(2L);
+		
+	}
  
 }
