@@ -81,6 +81,7 @@ public class TesteBancoJdbc{
 		try {
 			
 			UserposDAO dao = new  UserposDAO();
+			
 			dao.deletar(7L);
 		} catch (Exception e) {
 			e.printStackTrace();
